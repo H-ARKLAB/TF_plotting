@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from google.colab import drive
+from google.colab import drive 
 drive.mount('/content/drive')
 
 import pandas as pd
 df = pd.read_csv(
-    "/content/sites.txt",
+    "/content/sites.txt", # 이 부분에 자신의 site 파일 기입 (txt 파일 추천)
     sep=r"\s+",
     engine="python",
     header=1)
@@ -15,11 +15,12 @@ df.index = df.index+df['index'].astype(str)
 df = df.drop('index', axis=1)
 
 occ = pd.read_csv(
-    "/content/occ.txt",
+    "/content/occ.txt", # 이 부분에 자신의 occ 파일 기입 (txt 파일 추천)
     sep=r"\s+",
     engine="python",
     header=0,
 )
+#파일 data preprocessing
 occ.rename(columns={'theonlyone':'occupancy'}, inplace=True)
 occ = occ.set_index("site")
 
@@ -38,15 +39,13 @@ regions = {
 }
 to_add = pd.DataFrame.from_dict(regions, orient='index', columns=cols)
 final = pd.concat([merged, to_add])
-#final
+#final #(결과 궁금하면 '#' 제거)
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 df = final.copy()
-# df: columns = ['name','start','end','score','occupancy'] (또는 인덱스가 name면 reset)
 if 'name' not in df.columns:
     df = df.reset_index().rename(columns={'index':'name'})
 df['name'] = df['name'].astype(str).str.strip()
@@ -63,7 +62,7 @@ y_map = {tf:i for i, tf in enumerate(tfs)}
 # 3) 그림 그리기
 fig_h = max(4, 0.45*len(tfs) + 1.5)
 fig, ax = plt.subplots(figsize=(12, fig_h))
-colors = plt.cm.tab20(np.linspace(0, 1, len(tfs)))
+colors = plt.cm.tab20(np.linspace(0, 1, len(tfs))) # 이 코드의 단점 ㅎ 색깔을 지정할 수 없음
 
 for i, (key, g) in enumerate(df.groupby('row')):
     y = y_map[key]
