@@ -1,5 +1,5 @@
 # TF_plotting
-## Made by Jiwon Kim (Update date: 25.10.18)
+## Made by Jiwon Kim (Update date: 25.10.28)
 
 ***Explanation***
 
@@ -12,8 +12,8 @@ To run the code, you need two csv or txt files (txt files are recommended)
 * sites
 
 Kindly teach you how to get the files ㅎ
-* unfold --occupancy -i your_file_name.txn --invert > occupancy.txt
-* unfold --sites --gene LDLR_washington -i your_file_name.txt --invert > sites.txt
+* unfold --occupancy --gene LDLR_washington -i your_file_name.txn --invert > occupancy.txt
+* unfold --sites -i your_file_name.txt --invert > sites.txt
 
 You can send the files from Ubuntu to your local laptop or vice versa (Chat GPT can kindly explain, but I am also kind)
 * If Ubuntu --> Local laptop
